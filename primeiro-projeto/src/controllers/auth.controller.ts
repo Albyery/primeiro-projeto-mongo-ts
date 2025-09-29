@@ -7,7 +7,7 @@ import { UserModel } from "../models/user.model";
 // Carregar variáveis de ambiente do .env
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET as string;
+const JWT_SECRET: any = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN ?? "1h";
 
 if (!JWT_SECRET) {
