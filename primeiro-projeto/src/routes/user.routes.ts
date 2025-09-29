@@ -13,3 +13,5 @@ r.get("/", listUser);
 // r.get("/:id", getUser);
 r.put("/:id", updateUser);
 r.delete("/:id", deleteUser);
+
+export default r;
