@@ -1,14 +1,15 @@
 import { Router } from "express";
-import { createUser, deleteUser, listUser, updateUser } from "../controllers/user.controller";
-
+import { createUser, listUser, updateUser, deleteUser } from
+    "../controllers/user.controller";
+import { authenticate } from "../middlewares/authentication";
 const r = Router();
-// criar Usuário
-r.post("/criar", createUser);
-// listar usuários
-r.get("/listar", listUser);
-// atualizar usuário
-r.put("/atualizar/:id", updateUser);
-// remover usuário
-r.delete("/deletar/:id", deleteUser);
+// Público: cadastro (sign-up)
+r.post("/", createUser);
+// Protegido: a partir daqui, precisa de token
+r.use(authenticate);
 
-export default r;
+// Agora, somente com Bearer token válido:
+r.get("/", listUser);
+// r.get("/:id", getUser);
+r.put("/:id", updateUser);
+r.delete("/:id", deleteUser);

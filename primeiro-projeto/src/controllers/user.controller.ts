@@ -32,7 +32,7 @@ export async function createUser(req: Request, res: Response){
 export async function listUser(req: Request, res: Response) {
     const users = await UserModel.find({})
     // console.log(users)
-    res.json({ data: users.map(obj => ({id: obj._id, name: obj.name, email: obj.email, createAt: obj.createdAt, updateAt: obj.updatedAt}) ) });
+    res.json({ data: users.map(obj => ({id: obj._id, name: obj.name, email: obj.email, createAt: obj.createAt, updateAt: obj.updateAt}) ) });
 }
 
 export async function updateUser(req: Request, res: Response){
@@ -59,12 +59,12 @@ export async function updateUser(req: Request, res: Response){
 
     const user = await UserModel.findByIdAndUpdate(id, updates, {new: true});
     if (!user) return res.status(404).json({ error: "Usuário não encontrado" })
-    res.json({ data: {id: user._id, name: user.name, email: user.email, createAt: user.createdAt, updateAt: user.updatedAt} });
+    res.json({ data: {id: user._id, name: user.name, email: user.email, createAt: user.createAt, updateAt: user.updateAt} });
 }
 
 export async function deleteUser(req: Request, res: Response) {
     const id = req.params.id;
     const user = await UserModel.findByIdAndDelete(id);
     if (!user) return res.status(404).json({ error: "Usuário não encontrado" })
-    res.json({ data: {id: user._id, name: user.name, email: user.email, createAt: user.createdAt, updateAt: user.updatedAt} });
+    res.json({ data: {id: user._id, name: user.name, email: user.email, createAt: user.createAt, updateAt: user.updateAt} });
 }
